@@ -30,7 +30,6 @@ type Params struct {
 /* External functions */
 func getParams(defaults Defaults) Params {
 	args := docoptArgs(defaults)
-	//fmt.Printf("%v", args)
 
 	/* Fill defaults */
 	p := Params{}
@@ -48,6 +47,12 @@ func getParams(defaults Defaults) Params {
 
 	/* Fill struct from cli parameters */
 	// Required
+	if v, ok := args["-u"]; ok {
+		p.URL = v.(string)
+	} else {
+		fmt.Println("A URL is required. Try '-h'.\n")
+		os.Exit(UNKNOWN)
+	}
 	if v, ok := args["-f"]; ok {
 		p.ConfigFile = v.(string)
 	} else {
@@ -55,17 +60,9 @@ func getParams(defaults Defaults) Params {
 		os.Exit(UNKNOWN)
 	}
 
-	if v, ok := args["-H"]; ok {
-		p.URL = v.(string)
-	} else {
-		fmt.Println("A URL is required. Try '-h'.\n")
-		os.Exit(UNKNOWN)
-	}
-
 	// Optional
-	if v, ok := args["-W"]; ok {
+	if v, ok := args["-w"]; ok {
 		if v != nil {
-			p.URL = v.(string)
 			int, err := strconv.Atoi(v.(string))
 			if err == nil {
 				p.Warning = int
@@ -75,7 +72,7 @@ func getParams(defaults Defaults) Params {
 			}
 		}
 	}
-	if v, ok := args["-C"]; ok {
+	if v, ok := args["-c"]; ok {
 		if v != nil {
 			int, err := strconv.Atoi(v.(string))
 			if err == nil {
@@ -112,8 +109,8 @@ func getParams(defaults Defaults) Params {
 }
 
 func docoptArgs(defaults Defaults) map[string]interface{} {
-	versionMsg := "check-netscaler-activeservices " + defaults.Version
-	usage := versionMsg +
+	versionMsg := "check-netscaler-activeservices " + defaults.Version + "."
+	usage := versionMsg + "\n" +
 		`Nagios check for the number of active services.
 Bugs to ` + defaults.Author + `.
         _       _       _       _       _       _       _       _
@@ -123,23 +120,23 @@ Bugs to ` + defaults.Author + `.
 
 Usage:
   check-netscaler-activeservices
-  	-H <URL> -f <file>
-  	[-W <threshold1>] [-C <threshold2>]
-  	[-t <seconds>] [-p <percentage>] [-i]
+  	-u <URL> -f <file>
+  	[-i -t <seconds>]
+  	[-w <threshold> -c <threshold> -p]
   check-netscaler-activeservices -s
   check-netscaler-activeservices -h
   check-netscaler-activeservices --version
 
 Options:
-  -H <URL>        Netscaler Nitro Endpoint for service
-  -W <threshold1> Threshold for warning state
-  		  [default:` + fmt.Sprintf("%d", defaults.Warning) + `] (absolute value)
-  -C <threshold2> Threshold for critical state
-  		  [default:` + fmt.Sprintf("%d", defaults.Critical) + `] (absolute value)
+  -u <URL>        Netscaler Nitro Endpoint for service
   -f <file>       Configuration file
+  -w <threshold>  Threshold for warning state
+  		  [default:` + fmt.Sprintf("%d", defaults.Warning) + `] (absolute value)
+  -c <threshold>  Threshold for critical state
+  		  [default:` + fmt.Sprintf("%d", defaults.Critical) + `] (absolute value)
   -t <seconds>    Seconds after which the connection will timeout
    		  [default:` + fmt.Sprintf("%d", defaults.TimeOut) + `]
-  -p <percentage> The threshold are not absolute and represent percentages
+  -p  	 	  The threshold are not absolute and represent percentages
   		  [default:` + fmt.Sprintf("%t", defaults.Percentage) + `]
   -i              Don't check the SSL certificate
   		  [default:` + fmt.Sprintf("%t", defaults.Insecure) + `]

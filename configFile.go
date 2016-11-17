@@ -21,13 +21,13 @@ func retrieveValues(file string) (Config, error) {
 	}
 
 	// Unmarshall it
-	err = yaml.Unmarshal(data, c)
+	err = yaml.Unmarshal(data, &c)
 	return c, err
 }
 
 func printSampleConfig() {
-	sampleConf := "\n" +
-		`---
+	sampleConf :=
+`---
 ### check-netscaler-activeservices configuration ###
 user: "ccis_readonly"
 pass: "some_string"
