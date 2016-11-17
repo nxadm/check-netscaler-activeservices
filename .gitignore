@@ -22,3 +22,11 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# IDE
+.idea
+*.iml
+
+# Example data
+_*
+
