@@ -45,6 +45,12 @@ func main() {
 		fmt.Printf("[UNKNOWN] Can not decode the server's answer: %v\n", err)
 		os.Exit(UNKNOWN)
 	}
+
+
+	if len(answer.Lbvserver) != 1 {
+		fmt.Printf("[UNKNOWN] Invalid server answer: invalid Lvbserver size\n")
+		os.Exit(UNKNOWN)
+	}
 	activeServices, err := strconv.Atoi(answer.Lbvserver[0].Activeservices)
 	if err != nil {
 		fmt.Printf("[UNKNOWN] Invalid server answer: %v\n", err)
