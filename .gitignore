@@ -23,9 +23,11 @@ _testmain.go
 *.test
 *.prof
 
-# IDE
+# Editors & IDEs
 .idea
 *.iml
+*.sw*
+
 
 # Example data
 _*
