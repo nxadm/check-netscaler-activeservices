@@ -48,14 +48,18 @@ Options:
 Netscaler check with absolute count of services:
 
 ```
-$ check-netscaler-activeservices -f config.yml -u https://netscaler/nitro/v1/config/lbvserver/WEB_T_LBVSRV_WEB_somehost_HTTPS -c 1 -w 2
+$ check-netscaler-activeservices -f config.yml \
+-u https://netscaler/nitro/v1/config/lbvserver/WEB_T_LBVSRV_WEB_somehost_HTTPS \
+-c 1 -w 2
 [CRITICAL] Threshold (1), Active (1), Total (4)
 ```
 
 Netscaler check with relative count of services (percentage of total):
 
 ```
-$ check-netscaler-activeservices -f config.yml -u https://netscaler/nitro/v1/config/lbvserver/WEB_T_LBVSRV_WEB_somehost_HTTPS -c 25 -w 50 -p
+$ check-netscaler-activeservices -f config.yml \
+-u https://netscaler/nitro/v1/config/lbvserver/WEB_T_LBVSRV_WEB_somehost_HTTPS \
+-c 25 -w 50 -p
 [CRITICAL] Threshold (1), Active (1), Total (4)
 
 ```
