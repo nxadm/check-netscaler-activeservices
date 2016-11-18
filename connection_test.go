@@ -16,7 +16,6 @@ func TestGetJson(t *testing.T) {
 		Warning:    0,
 	}
 
-	//getJson(config Config, params Params) (*Answer, error)
 	answer, err := getJson(c, p)
 	if err == nil {
 		t.Error("This connection attempt must return an error.")

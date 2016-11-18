@@ -8,10 +8,10 @@ func TestRetrieveValues(t *testing.T) {
 	if err != nil {
 		t.Error("Can not parse configuration.")
 	}
-	if config.User != "someuser" {
-		t.Error("Unexepected user value. Expected \"someuser\", got \"" + config.User + "\"")
+	if config.User != "some_user" {
+		t.Error("Unexepected user value. Expected \"some_user\", got \"" + config.User + "\"")
 	}
-	if config.Pass != "somepassword" {
-		t.Error("Unexepected user value. Expected \"somepassword\", got \"" + config.Pass + "\"")
+	if config.Pass != "some_password" {
+		t.Error("Unexepected user value. Expected \"some_password\", got \"" + config.Pass + "\"")
 	}
 }

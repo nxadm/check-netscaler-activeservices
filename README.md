@@ -73,7 +73,7 @@ A configuration file is used to store the user and password. You can create a co
 $ check-netscaler-activeservices -s
 ---
 ### check-netscaler-activeservices configuration ###
-user: "ccis_readonly"
+user: "some_user"
 pass: "some_string"
 
 ```
