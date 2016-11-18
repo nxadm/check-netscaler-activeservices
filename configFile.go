@@ -29,8 +29,8 @@ func printSampleConfig() {
 	sampleConf :=
 `---
 ### check-netscaler-activeservices configuration ###
-user: "ccis_readonly"
-pass: "some_string"
+user: "someuser"
+pass: "somepassword"
 `
 	fmt.Println(sampleConf)
 }

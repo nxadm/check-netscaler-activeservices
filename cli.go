@@ -27,7 +27,6 @@ type Params struct {
 	Warning    int
 }
 
-/* External functions */
 func getParams(defaults Defaults) Params {
 	args := docoptArgs(defaults)
 
