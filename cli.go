@@ -44,7 +44,7 @@ func getParams(defaults Defaults) Params {
 		os.Exit(UNKNOWN)
 	}
 
-	/* Fill struct from cli parameters */
+	/* Fill struct from cli parameters + convert from string if necessary */
 	// Required
 	if v, ok := args["-u"]; ok {
 		p.URL = v.(string)

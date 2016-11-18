@@ -20,7 +20,7 @@ func getJson(config Config, params Params) (*Answer, error) {
 	answer := &Answer{}
 	client := &http.Client{Timeout: time.Second * time.Duration(params.TimeOut)}
 
-	// Skip certificate validation if required
+	/* Skip certificate validation if required */
 	if params.Insecure {
 		client.Transport = &http.Transport{
 			TLSClientConfig: &tls.Config{
@@ -29,7 +29,7 @@ func getJson(config Config, params Params) (*Answer, error) {
 		}
 	}
 
-	// Connect
+	/* Connect and convert JSON to datastructure */
 	request, err := http.NewRequest("GET", params.URL, nil)
 	request.SetBasicAuth(config.User, config.Pass)
 	response, err := client.Do(request)

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"testing"
 	"os"
+	"testing"
 )
 
 var defaultsTest = Defaults{
@@ -21,8 +21,8 @@ func TestGetParams(t *testing.T) {
 	okCliTests := make(map[string][]string)
 	okCliTests["okMinimalCli"] = []string{"cmd", "-f", "some_file", "-u", "some_url"}
 	okCliTests["okMaximalCli"] =
-		[]string{"cmd", "-f", "some_file", "-u", "some_url", "-w", "1", "-c", "1","-t", "15", "-p", "-i"}
-	for _, cli := range(okCliTests) {
+		[]string{"cmd", "-f", "some_file", "-u", "some_url", "-w", "1", "-c", "1", "-t", "15", "-p", "-i"}
+	for _, cli := range okCliTests {
 		os.Args = cli
 		getParams(defaultsTest)
 	}

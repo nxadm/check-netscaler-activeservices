@@ -5,7 +5,7 @@ import (
 )
 
 func TestGetJson(t *testing.T) {
-	c := Config{User: "me", Pass: "secret", }
+	c := Config{User: "me", Pass: "secret"}
 	p := Params{
 		ConfigFile: "string",
 		Critical:   0,

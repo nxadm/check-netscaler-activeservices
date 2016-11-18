@@ -6,11 +6,13 @@ import (
 	"strconv"
 )
 
+/* Nagios exit status */
 const OK = 0
 const WARNING = 1
 const CRITICAL = 2
 const UNKNOWN = 3
 
+/* Application defaults */
 const author = "Claudio Ramirez <pub.claudio@gmail.com>"
 const warning = 0
 const critical = 0
@@ -20,7 +22,8 @@ const timeOut = 10
 const version = "0.1.0"
 
 func main() {
-	// Command line interface
+
+	/* Command line interface */
 	defaults := Defaults{
 		Author:     author,
 		Warning:    warning,
@@ -38,7 +41,7 @@ func main() {
 		os.Exit(UNKNOWN)
 	}
 
-	// Query the server
+	/* Query the API server */
 	answer, err := getJson(config, params)
 	//fmt.Printf("[DEBUG] Answer: %v\n", answer)
 	if err != nil {
@@ -46,9 +49,8 @@ func main() {
 		os.Exit(UNKNOWN)
 	}
 
-
 	if len(answer.Lbvserver) != 1 {
-		fmt.Printf("[UNKNOWN] Invalid server answer: invalid Lvbserver size\n")
+		fmt.Println("[UNKNOWN] Invalid server answer: invalid Lvbserver size")
 		os.Exit(UNKNOWN)
 	}
 	activeServices, err := strconv.Atoi(answer.Lbvserver[0].Activeservices)
@@ -62,19 +64,21 @@ func main() {
 		os.Exit(UNKNOWN)
 	}
 	if totalServices == 0 {
-		fmt.Println("[UNKNOWN] Service doesn't seem to be configured (totalservices == 0)\n")
+		fmt.Println("[UNKNOWN] Service doesn't seem to be configured (totalservices == 0)")
 		os.Exit(UNKNOWN)
 	}
 
-	// Create the warnings
+	/* Exit with a corresponding Nagios exit code */
 	var w, c int
 	if params.Percentage {
+		// Don't devide by zero
 		if params.Warning == 0 {
 			params.Warning = 1
 		}
 		if params.Critical == 0 {
 			params.Critical = 1
 		}
+		// We want percentage: floating point division
 		w = int(
 			float32(totalServices) *
 				(float32(params.Warning) / float32(100)))

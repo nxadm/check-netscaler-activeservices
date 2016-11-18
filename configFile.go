@@ -6,7 +6,8 @@ import (
 	"io/ioutil"
 )
 
-type Config struct { // Interface with the yaml configuration file
+/* Interface with the yaml configuration file */
+type Config struct {
 	User string `yaml:"user,omitempty"`
 	Pass string `yaml:"pass,omitempty"`
 }
@@ -27,7 +28,7 @@ func retrieveValues(file string) (Config, error) {
 
 func printSampleConfig() {
 	sampleConf :=
-`---
+		`---
 ### check-netscaler-activeservices configuration ###
 user: "someuser"
 pass: "somepassword"
