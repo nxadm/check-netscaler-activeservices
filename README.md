@@ -74,6 +74,6 @@ $ check-netscaler-activeservices -s
 ---
 ### check-netscaler-activeservices configuration ###
 user: "some_user"
-pass: "some_string"
+pass: "some_password"
 
 ```
