@@ -1,9 +1,8 @@
 # check-netscaler-activeservices
 
-A Nagios plugin to check the number of active backend services of a netscaler frontend instance.
+A Nagios/Icinga plugin to check the number of active backend services of a netscaler frontend instance.
 
-This program makes use of the Nitro API for Citrix Netscaler (tested with v1). The URLs supplied to -u are the specific for your configuration. At the
-moment, a lbvserver (Load Balancing Virtual Server) configuration is assumed.
+This program makes use of the Nitro API for Citrix Netscaler (tested with v1). The URLs supplied to -u are the specific for your configuration. At the moment, a lbvserver (Load Balancing Virtual Server) configuration is assumed.
 
 ## Usage
 
